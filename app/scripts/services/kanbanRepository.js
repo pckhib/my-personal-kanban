@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 angular.module('mpk').factory('kanbanRepository', function (cloudService, cryptoService) {
   return {
     kanbansByName : {},
@@ -35,12 +37,26 @@ angular.module('mpk').factory('kanbanRepository', function (cloudService, crypto
 
     save: function(){
       var prepared = this.prepareSerializedKanbans();
-      localStorage.setItem('myPersonalKanban', prepared);
+
+      // save to browser storage
+      //localStorage.setItem('myPersonalKanban', prepared);
+
+      // save to local file
+      try {
+        fs.writeFileSync('data.json', prepared, 'utf-8');
+      } catch (e) {
+        alert('Failed to save file!');
+      }
       return this.kanbansByName;
     },
 
     load: function(){
-      var saved = angular.fromJson(localStorage.getItem('myPersonalKanban'));
+      // load from browser storage
+      //var saved = angular.fromJson(localStorage.getItem('myPersonalKanban'));
+
+      // load from file
+      var saved = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+
       if (saved === null) {
         return null;
       }

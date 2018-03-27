@@ -1,6 +1,6 @@
 {
   "name": "mpk",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "main": "app/main.js",
   "dependencies": {},
   "devDependencies": {

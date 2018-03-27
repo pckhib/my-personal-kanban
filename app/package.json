@@ -1,0 +1,10 @@
+{
+  "name": "mpk",
+  "version": "0.0.0",
+  "productName": "My-Kanban",
+  "main": "main.js",
+  "dependencies": {},
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}

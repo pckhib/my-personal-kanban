@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+const sample_data = {"kanbans":{"My Project":{"name":"My Project","numberOfColumns":3,"columns":[{"name":"Column 1","cards":[]},{"name":"Column 2","cards":[]},{"name":"Column 3","cards":[]}],"archived":[],"settings":{}}},"lastUsed":"My Project","theme":"default-bright","lastUpdated":0};
 
 angular.module('mpk').factory('kanbanRepository', function (cloudService, cryptoService) {
   return {
@@ -55,7 +56,12 @@ angular.module('mpk').factory('kanbanRepository', function (cloudService, crypto
       //var saved = angular.fromJson(localStorage.getItem('myPersonalKanban'));
 
       // load from file
-      var saved = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+      var saved;
+      if (fs.existsSync('data.json')) {
+        saved = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+      } else {
+        saved = sample_data;
+      }
 
       if (saved === null) {
         return null;

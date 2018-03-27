@@ -14,3 +14,4 @@ package-lock.json
 dist/
 bower_components/
 npm-*.log
+data.json
